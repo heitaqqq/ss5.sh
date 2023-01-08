@@ -118,9 +118,9 @@ bbr_install() {
 
 user_set() {
 	#read -rp  "请设置ss5账户。默认:admin）:" user
-	[[ -z ${user} ]] && user="tianyi"
+	[[ -z ${user} ]] && user="cangtian123"
 	#read -rp "请设置ss5连接密码。默认:admin）:" passwd
-	[[ -z ${passwd} ]] && passwd="tianyi"
+	[[ -z ${passwd} ]] && passwd="cangtian123"
 }
 
 install_ss5() {
