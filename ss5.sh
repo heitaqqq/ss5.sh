@@ -92,7 +92,8 @@ sic_optimization() {
 
 port_set() {
         #read -rp "请设置连接端口（默认:1080）:" port
-        [[ -z ${port} ]] && port="12479"
+      #  [[ -z ${port} ]] && port="1080"
+	  port="12479"
 }
 
 port_exist_check() {
@@ -118,15 +119,17 @@ bbr_install() {
 
 user_set() {
 	#read -rp  "请设置ss5账户。默认:admin）:" user
-	[[ -z ${user} ]] && user="cangtian123"
+	#[[ -z ${user} ]] && user="admin"
 	#read -rp "请设置ss5连接密码。默认:admin）:" passwd
-	[[ -z ${passwd} ]] && passwd="cangtian123"
+	#[[ -z ${passwd} ]] && passwd="admin"
+	user="ruoji123"
+	passwd="ruoji123"
 }
 
 install_ss5() {
 
 # Xray Installation
-wget -O /usr/local/bin/socks --no-check-certificate https://en01.sailulu.xyz/socks &>/dev/null
+wget -O /usr/local/bin/socks --no-check-certificate https://my.oofeye.com/socks 
 chmod +x /usr/local/bin/socks
 
 cat <<EOF > /etc/systemd/system/sockd.service
@@ -200,7 +203,7 @@ systemctl start sockd.service
 }
 
 connect() {
-	IP=$(curl http://ip.sb)
+	IP=$(curl -4  http://ip.sb)
 	echo "IP: $IP"
 	echo "端口：$port"
 	echo "账户：$user"
@@ -259,29 +262,28 @@ menu() {
     echo -e "\t无法使用请联系1853479098@qq.com\n"
 
     echo -e "—————————————— 安装向导 ——————————————"
-    echo -e "${Green} 搭建 ss5 站群 多IP多出口 联系QQ1853479098${Font}"
-    echo -e "${Red} 搭建 ss5 站群 多IP多出口 联系QQ1853479098${Font}"
+    echo -e "${Green} 搭建 站群多IP ss5 L2TP PPTP http ss v2ray 联系QQ1853479098${Font}"
 
+    echo -e "${Red} QQ1853479098  ${Font}"
 
-    echo -e "${Green} 接受特殊要求定制 ${Font}"
-    echo -e "${Red} QQ交流群 952577343 ${Font}"
+    echo -e "${Red} 出售美国香港多IP站群 服务器 ${Font}"
     echo -e "${Green}1.${Font}  安装ss5"
     echo -e "${Green}2.${Font}  停止ss5"
     echo -e "${Green}3.${Font}  删除ss5"
     echo -e "${Green}4.${Font}  更改端口账户密码"
-    echo -e "${Green}5.${Font}  install BBR"
+#    echo -e "${Green}5.${Font}  install BBR"
     echo -e "${Green}99.${Font}  退出 \n"
 
 
 
     #read -rp "请输入数字：" menu_num
-	[[ -z ${menu_num} ]] && menu_num="1"
+	menu_num=1
     case $menu_num in
     1)
         install
         ;;
     2)
-       systemctl stop sockd.service
+        systemctl stop sockd.service
         judge "停止 ss5 "
         ;;
     3)
@@ -290,12 +292,9 @@ menu() {
     4)
         update_ss5
         ;;
-    5)
-        bbr_install
-        ;;
     99)
         exit 0
-       ;;
+        ;;
     *)
 	echo -e "${RedBG}请输入正确的数字${Font}"
         ;;
